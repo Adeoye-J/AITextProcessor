@@ -12,7 +12,7 @@ const InputBox = ( ) => {
     }
 
     return (
-        <div className='fixed bottom-0 flex justify-center w-full py-5'>
+        <div className='fixed bottom-0 flex justify-center w-full py-3 bg-inherit'>
             <div className="w-[94%] sm:w-[80%] flex items-center">
                 <textarea 
                     value={input} 

@@ -5,7 +5,7 @@ import ChatSection from '../components/ChatSection'
 const WorkSpace = () => {
 
     return (
-        <div className='pt-20 min-h-screen bg-[#d0d0ce]'>
+        <div className='py-20 min-h-screen bg-[#d0d0ce]'>
             <ChatSection />
 
 
