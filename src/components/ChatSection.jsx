@@ -26,7 +26,7 @@ const ChatSection = () => {
                             {summarizedTexts[message.id] && <p className="mt-1 text-sm text-green-600">{summarizedTexts[message.id]}</p>}
 
                             {/* Translate Dropdown */}
-                            <select onChange={(e) => translateText(message.text, e.target.value)} className="mt-2 p-1 border max-w-[150px] bg-transparent border-[#1d4537] cursor-pointer py-2">
+                            <select onChange={(e) => translateText(message.text, e.target.value, message.id)} className="mt-2 p-1 border max-w-[150px] bg-transparent border-[#1d4537] cursor-pointer py-2">
                                 <option value="">Translate to...</option>
                                 <option value="pt">Portuguese</option>
                                 <option value="es">Spanish</option>

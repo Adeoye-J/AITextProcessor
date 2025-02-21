@@ -80,8 +80,13 @@ export const TextProvider = ({ children }) => {
                 `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLang}`
             );
             const data = await response.json();
+
+            // if (!id) {
+            //     console.error("Message ID is undefined:", text);
+            //     return;
+            // }
     
-            if (data.responseData.translatedText) {
+            if (data.responseData && data.responseData.translatedText) {
                 setTranslatedTexts((prev) => {
                     const updated = { ...prev, [id]: data.responseData.translatedText };
                     localStorage.setItem("translatedTexts", JSON.stringify(updated));
