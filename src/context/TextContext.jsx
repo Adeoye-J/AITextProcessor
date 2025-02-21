@@ -88,6 +88,7 @@ export const TextProvider = ({ children }) => {
             }
         } catch (error) {
             console.error("Error fetching translation:", error);
+            alert("Failed to fetch translation. Check API key or try again later.");
         }
 
         setTranslateLoading(false);
