@@ -17,8 +17,9 @@ export const TextProvider = ({ children }) => {
         return JSON.parse(localStorage.getItem("summarizedTexts")) || {};
     });
 
-    const [summaryLoading, setSummaryLoading] = useState(false);
-    const [translateLoading, setTranslateLoading] = useState(false);
+    const [summaryLoading, setSummaryLoading] = useState({});
+    const [translateLoading, setTranslateLoading] = useState({});
+
     const [input, setInput] = useState("");
 
     const lngDetector = new LanguageDetect();
@@ -36,10 +37,10 @@ export const TextProvider = ({ children }) => {
 
     const summarizeText = async (text, id) => {
         if (!text) return alert("Please enter some text to summarize.");
-
-        setSummaryLoading(true);
+    
+        setSummaryLoading((prev) => ({ ...prev, [id]: true }));
         await delay(1000);
-
+    
         try {
             const response = await axios.post(
                 "https://api.openai.com/v1/chat/completions",
@@ -55,7 +56,7 @@ export const TextProvider = ({ children }) => {
                     }
                 }
             );
-
+    
             setSummarizedTexts((prev) => {
                 const updated = { ...prev, [id]: response.data.choices[0].message.content };
                 localStorage.setItem("summarizedTexts", JSON.stringify(updated));
@@ -65,20 +66,21 @@ export const TextProvider = ({ children }) => {
             console.error("Error fetching summary:", error);
             alert("Failed to fetch summary. Check API key or try again later.");
         }
-
-        setSummaryLoading(false);
+    
+        setSummaryLoading((prev) => ({ ...prev, [id]: false }));
     };
+    
 
     const translateText = async (text, targetLang, id) => {
-        setTranslateLoading(true);
+        setTranslateLoading((prev) => ({ ...prev, [id]: true })); 
         await delay(1000);
-
+    
         try {
             const response = await fetch(
                 `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLang}`
             );
             const data = await response.json();
-
+    
             if (data.responseData.translatedText) {
                 setTranslatedTexts((prev) => {
                     const updated = { ...prev, [id]: data.responseData.translatedText };
@@ -90,9 +92,9 @@ export const TextProvider = ({ children }) => {
             console.error("Error fetching translation:", error);
             alert("Failed to fetch translation. Check API key or try again later.");
         }
-
-        setTranslateLoading(false);
-    };
+    
+        setTranslateLoading((prev) => ({ ...prev, [id]: false })); 
+    };    
 
     const handleSend = (text) => {
         if (!text.trim()) return;
