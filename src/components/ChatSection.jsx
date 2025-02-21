@@ -35,8 +35,8 @@ const ChatSection = () => {
                                 <option value="fr">French</option>
                             </select>
                             
-                            {translateLoading && <p className="mt-1 text-sm text-[#1d4537]">Loading Translation...</p>}
-                            {summaryLoading && <p className="mt-1 text-sm text-[#1d4537]">Loading Summary...</p>}
+                            {summaryLoading[message.id] && <p className="mt-1 text-sm text-[#1d4537]">Loading Summary...</p>}
+                            {translateLoading[message.id] && <p className="mt-1 text-sm text-[#1d4537]">Loading Translation...</p>}
                             {translatedTexts[message.id] && <p className="mt-1 text-sm text-blue-600">{translatedTexts[message.id]}</p>}
                         </div>
                     ))
