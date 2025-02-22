@@ -9,7 +9,7 @@ const ChatSection = () => {
         <div className='flex w-full justify-center'>
             <div className="w-[94%] sm:w-[80%]">
                 {
-                    messages &&
+                    (messages && messages.length > 0) ?
                     messages.map((message) => (
                         <div key={message.id} className={`w-full p-3 my-2 border border-[#1d4537] rounded-lg flex flex-col gap-2`}>
                             <p>{message.text}</p>
@@ -40,6 +40,7 @@ const ChatSection = () => {
                             {translatedTexts[message.id] && <p className="mt-1 text-sm text-blue-600">{translatedTexts[message.id]}</p>}
                         </div>
                     ))
+                    : <p className='text-center text-[#1d4537] pt-48 font-semibold text-base sm:text-lg'>No messages yet!</p>
                 }
             </div>
         </div>

@@ -18,7 +18,7 @@ const InputBox = ( ) => {
                     value={input} 
                     onChange={(e) => setInput(e.target.value)}
                     placeholder='Type here...'
-                    className='flex-1 px-5 py-3 h-14 border border-[#1d4537] rounded-full focus:outline-none resize-none w-full'
+                    className='flex-1 px-5 py-3.5 h-14 border border-[#1d4537] rounded-full focus:outline-none resize-none w-full'
                 />
                 <button
                     onClick={handleSendClick}

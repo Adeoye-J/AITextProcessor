@@ -81,11 +81,6 @@ export const TextProvider = ({ children }) => {
             );
             const data = await response.json();
 
-            // if (!id) {
-            //     console.error("Message ID is undefined:", text);
-            //     return;
-            // }
-    
             if (data.responseData && data.responseData.translatedText) {
                 setTranslatedTexts((prev) => {
                     const updated = { ...prev, [id]: data.responseData.translatedText };
@@ -114,6 +109,12 @@ export const TextProvider = ({ children }) => {
         });
     };
 
+    // ✅ Clear chat function
+    const clearChat = () => {
+        setMessages([]);
+        localStorage.removeItem("messages");
+    };
+
     // ✅ Load data from localStorage on mount
     useEffect(() => {
         const storedMessages = JSON.parse(localStorage.getItem("messages")) || [];
@@ -137,7 +138,8 @@ export const TextProvider = ({ children }) => {
         summarizeText,
         summarizedTexts,
         summaryLoading,
-        translateLoading
+        translateLoading,
+        clearChat
     };
 
     return <TextContext.Provider value={value}>{children}</TextContext.Provider>;
